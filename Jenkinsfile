@@ -17,7 +17,7 @@ pipeline{
 
                  stage('SonarQube Analysis'){
                                         steps{
-                                              bat './mvnw sonar:sonar'
+                                              bat './mvnw clean install sonar:sonar'
                                         }
                                 }
 
