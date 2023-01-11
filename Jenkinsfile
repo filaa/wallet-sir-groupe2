@@ -1,6 +1,8 @@
 pipeline{
     agent any
-
+                tools{
+                      maven 'Maven'
+                    }
     stages{
             stage('Source'){
             steps{
@@ -9,9 +11,15 @@ pipeline{
             }
             stage('Build'){
                         steps{
-                              bat 'echo "build in process"'
+                              bat './mvnw clean package'
                         }
                 }
+
+                 stage('SonarQube Analysis'){
+                                        steps{
+                                              bat './mvnw sonar:sonar'
+                                        }
+                                }
 
     }
 
