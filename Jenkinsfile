@@ -11,7 +11,7 @@ pipeline{
             }
             stage('Build'){
                         steps{
-                              bat './mvnw clean org.jacoco:jacoco-maven-plugin:jar:0.8.8:prepare-agent install'
+                              bat './mvnw clean org.jacoco:jacoco-maven-plugin:prepare-agent install'
                         }
                 }
 
