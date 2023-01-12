@@ -11,7 +11,7 @@ pipeline{
             }
             stage('Build'){
                         steps{
-                              bat './mvnw clean install org.jacoco:jacoco-maven-plugin'
+                              bat './mvnw clean install jacoco:report'
                         }
                 }
 
