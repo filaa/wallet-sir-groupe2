@@ -11,13 +11,13 @@ pipeline{
             }
             stage('Build'){
                         steps{
-                              sh 'mvnw clean package org.jacoco:jacoco-maven-plugin:prepare-agent'
+                              bat 'mvnw clean package org.jacoco:jacoco-maven-plugin:prepare-agent'
                         }
                 }
 
                  stage('SonarQube Analysis'){
                                         steps{
-                                              sh 'mvnw  sonar:sonar'
+                                              bat 'mvnw  sonar:sonar'
                                         }
                                 }
 
