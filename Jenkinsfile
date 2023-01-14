@@ -11,13 +11,13 @@ pipeline{
             }
             stage('Build'){
                         steps{
-                              bat './mvnw clean package '
+                              bat './mvn clean package '
                         }
                 }
 
                  stage('SonarQube Analysis'){
                                         steps{
-                                              bat './mvnw  sonar:sonar'
+                                              bat './mvn  sonar:sonar'
                                         }
                                 }
 
