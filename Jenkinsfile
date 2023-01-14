@@ -11,13 +11,13 @@ pipeline{
             }
             stage('Build'){
                         steps{
-                              bat './mvnw clean install jacoco:report'
+                              bat './mvnw clean install '
                         }
                 }
 
                  stage('SonarQube Analysis'){
                                         steps{
-                                              bat './mvnw clean install sonar:sonar'
+                                              bat './mvnw  sonar:sonar'
                                         }
                                 }
 
