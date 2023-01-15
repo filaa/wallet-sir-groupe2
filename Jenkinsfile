@@ -19,7 +19,7 @@ pipeline{
                                 }
             stage('Build Docker image'){
                                          steps{
-                                           bat 'docker build -t sir-soir-groupe21'
+                                           bat 'docker build . '
                                                }
                                          }
             stage('login to docker Hub'){
