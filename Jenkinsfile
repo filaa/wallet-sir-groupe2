@@ -19,7 +19,7 @@ pipeline{
                                 }
             stage('Build Docker image'){
                                          steps{
-                                                   bat 'docker build -t palaye/sir-soir-wallet:sir-soir-groupe2:latest'
+                                                   bat 'docker build  palaye/sir-soir-wallet:sir-soir-groupe2:latest'
                                                }
                                          }
             stage('login to docker Hub'){
