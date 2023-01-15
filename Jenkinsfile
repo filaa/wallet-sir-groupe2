@@ -19,7 +19,7 @@ pipeline{
                                 }
             stage('Build Docker image'){
                                          steps{
-                                           bat 'docker build -t sir-soir-groupe2'
+                                           bat 'docker build -t sir-soir-groupe21'
                                                }
                                          }
             stage('login to docker Hub'){
@@ -29,7 +29,7 @@ pipeline{
                                              }
             stage('Push to docker Hub'){
                                        steps{
-                                           bat 'docker push palaye/sir-soir-groupe2'
+                                           bat 'docker push palaye/sir-soir-groupe21'
                                                    }
                                            }
 
