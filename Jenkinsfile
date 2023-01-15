@@ -17,6 +17,21 @@ pipeline{
                                               bat 'mvnw  sonar:sonar'
                                         }
                                 }
+            stage('Build Docker image'){
+                                         steps{
+                                                   bat 'docker build -t palaye/sir-soir-wallet:sir-soir-groupe2:latest'
+                                               }
+                                         }
+            stage('login to docker Hub'){
+                                      steps{
+                                             bat 'docker login -u palaye -p gamakishi'
+                                                        }
+                                             }
+            stage('Push to docker Hub'){
+                                       steps{
+                                           bat 'docker push palaye/sir-soir-wallet:sir-soir-groupe2:latest'
+                                                   }
+                                           }
 
     }
 
