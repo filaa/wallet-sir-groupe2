@@ -29,7 +29,7 @@ pipeline{
                                              }
             stage('Push to docker Hub'){
                                        steps{
-                                           bat 'docker push palaye/sir-soir-groupe2'
+                                           bat 'docker push sir-soir-groupe2'
                                                    }
                                            }
 
