@@ -4,6 +4,8 @@ import com.sir.wallet.model.Wallet;
 import com.sir.wallet.services.WalletService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/wallet")
 public class WalletController {
@@ -15,7 +17,7 @@ public class WalletController {
     }
 
     @GetMapping("/wallets/{id}")
-    public Wallet getWallet(@PathVariable long id) {
+    public Optional<Wallet> getWallet(@PathVariable long id) {
         return walletService.getWalletById(id);
     }
 
