@@ -20,6 +20,19 @@ public class Transaction {
     public Transaction() {
     }
 
+    public Transaction(long id, Wallet wallet, long amount, String type) {
+        this.id = id;
+        this.wallet = wallet;
+        this.amount = amount;
+        this.type = type;
+    }
+
+    public Transaction(Wallet wallet, long amount, String type) {
+        this.wallet = wallet;
+        this.amount = amount;
+        this.type = type;
+    }
+
     public long getId() {
         return id;
     }

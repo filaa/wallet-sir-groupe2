@@ -2,8 +2,7 @@ package com.sir.wallet.model;
 
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+
 import jakarta.persistence.Id;
 
 
@@ -20,6 +19,14 @@ public class Wallet {
 
     public Wallet() {
     }
+
+    public Wallet(long id, String name, long balance) {
+        this.id = id;
+        this.name = name;
+        this.balance = balance;
+    }
+
+
 
     public long getId() {
         return id;
