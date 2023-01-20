@@ -18,21 +18,21 @@ public class WalletController {
         this.walletService = walletService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/wallets/{id}")
     public Optional<Wallet> getWallet(@PathVariable long id) {
         return walletService.getWalletById(id);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/wallets/{id}")
     public Wallet updateWallet(@PathVariable long id, @RequestBody Wallet wallet) {
         return walletService.updateWallet(id, wallet);
     }
 
-    @PostMapping
-    public Wallet createWallet(@RequestBody Wallet wallet) {
-        return walletService.saveWallet(wallet);
+    @PostMapping("/wallets")
+    public ResponseEntity<Wallet> saveWallet(@RequestBody Wallet wallet) {
+        return  ResponseEntity.ok(walletService.saveWallet(wallet));
     }
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/wallets/{id}")
     public ResponseEntity deleteWallet(Wallet wallet )  {
 
         walletService.deleteWallet(wallet);
