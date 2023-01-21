@@ -37,32 +37,27 @@ private List<Wallet> wallets;
     private WalletRepository walletRepository;
 @Autowired
     private WalletController walletController;
-
     @Given("a wallet with name {string} and balance {long}")
     public void createWallet(String name, long balance) {
 
         wallet = new Wallet(1,"test", 2000);
 
     }
-
     @When("I POST the wallet to the {string} endpoint")
     public void postWallet(String endpoint) {
 
       response=walletController.saveWallet(wallet);
 
     }
-
     @Then("the response status should be {int}")
     public void checkResponseStatus(int status) {
 
         assertEquals(status, response.getStatusCode().value());
     }
-
     @And("the response body should contain the wallet")
     public void checkResponseBody() {
         Wallet personResponse = response.getBody();
         assertNotNull(personResponse);
-
     }
 
 
