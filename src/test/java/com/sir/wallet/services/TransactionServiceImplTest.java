@@ -51,6 +51,7 @@ class TransactionServiceImplTest {
        Optional<Transaction> transaction1 = transactionServiceImpl.getTransactionById(transaction.getId());
 
         //Then
+        assertTrue(transaction1.isPresent());
         assertEquals(transaction1.get().getWallet(), transaction.getWallet());
         verify(transactionRepository, times(1)).findById(transaction.getId());
     }
@@ -94,7 +95,6 @@ class TransactionServiceImplTest {
         transactions.add(transactionRepository.save(new Transaction(wallet, 50000,"depot")));
         transactions.add(transactionRepository.save(new Transaction(wallet,1000000, "depot")));
         transactions.add(transactionRepository.save(new Transaction(wallet,400000, "retrait")));
-        Iterable<Transaction> transactionIterable= transactions;
         when(transactionRepository.findAll()).thenReturn(transactions);
 
         //When
@@ -102,7 +102,7 @@ class TransactionServiceImplTest {
         Iterable<Transaction> transResponse = transactionServiceImpl.getAllTransactions();
 
         //Then
-        assertEquals(transactionIterable,transResponse);
+        assertEquals(transactions,transResponse);
         verify(transactionRepository, times(1)).findAll();
     }
 }

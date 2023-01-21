@@ -17,18 +17,18 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @PostMapping
+    @PostMapping("/transactions")
     public Transaction createTransaction(@RequestBody Transaction transaction) {
         return transactionService.createTransaction(transaction);
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteTransaction( Transaction transaction )  {
+    @DeleteMapping("/transactions")
+    public ResponseEntity<Void> deleteTransaction( @RequestBody Transaction transaction )  {
 
         transactionService.deleteTransaction(transaction);
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/transactions")
     public ResponseEntity<Transaction> updateTransaction(Transaction transaction) {
         return ResponseEntity.ok(transactionService.updateTransaction(transaction));
     }

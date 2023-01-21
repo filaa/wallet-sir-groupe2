@@ -26,6 +26,10 @@ public class Wallet {
         this.balance = balance;
     }
 
+    public Wallet(String name, long balance) {
+        this.name = name;
+        this.balance = balance;
+    }
 
 
     public long getId() {
