@@ -3,6 +3,9 @@ package com.sir.wallet.controller;
 
 import com.sir.wallet.model.Wallet;
 import com.sir.wallet.services.WalletService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,8 +16,12 @@ import java.util.Optional;
 public class WalletController {
 
     private final WalletService walletService;
+    private static Logger logger =  LogManager.getLogger(WalletController.class);
+
 
     public WalletController(WalletService walletService) {
+
+        logger.info("PersonController constructor");
         this.walletService = walletService;
     }
 
@@ -29,8 +36,10 @@ public class WalletController {
     }
 
     @PostMapping("/wallets")
-    public ResponseEntity<Wallet> saveWallet(@RequestBody Wallet wallet) {
-        return  ResponseEntity.ok(walletService.saveWallet(wallet));
+    public ResponseEntity<Wallet> saveWallet(@RequestBody  Wallet wallet) {
+        logger.info("===> savePerson");
+        Wallet savedWallet = walletService.saveWallet(wallet);
+        return  new ResponseEntity<>(savedWallet, HttpStatus.CREATED);
     }
     @DeleteMapping("/wallets/{id}")
     public ResponseEntity deleteWallet(Wallet wallet )  {
