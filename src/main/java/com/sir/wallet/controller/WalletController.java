@@ -27,6 +27,7 @@ public class WalletController {
 
     @GetMapping("/wallets/{id}")
     public Optional<Wallet> getWallet(@PathVariable long id) {
+
         return walletService.getWalletById(id);
     }
 

@@ -12,15 +12,14 @@ services:
       - dbpostgresql
   dbpostgresql:
     container_name: sir-groupe2-db
-    image: postgres
+    image: postgres:9.6
     ports:
       - "5432:5432"
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: passer
-      PGDATA: /var/lib/postgresql/data/pgdata
+      POSTGRES_PASSWORD: fila
 
     volumes:
-      - ./wallet-db-data/:/var/lib/postgresql
+      - ./wallet-db-data/:/var/lib/postgresql/data
 
 

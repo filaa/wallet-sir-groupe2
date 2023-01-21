@@ -16,7 +16,6 @@ public class Wallet {
 
     // Constructors, getters, and setters
 
-
     public Wallet() {
     }
 

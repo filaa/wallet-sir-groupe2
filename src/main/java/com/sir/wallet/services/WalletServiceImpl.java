@@ -9,6 +9,9 @@ import java.util.Optional;
 @Service
 public class WalletServiceImpl implements WalletService {
     WalletRepository walletRepository;
+    public WalletServiceImpl(WalletRepository  walletRepository) {
+        this.walletRepository = walletRepository;
+    }
     @Override
     public Optional<Wallet> getWalletById(Long id) {
 
@@ -17,8 +20,7 @@ public class WalletServiceImpl implements WalletService {
 
     @Override
     public Wallet saveWallet(Wallet wallet) {
-        return this.walletRepository.save(wallet)
-                ;
+        return walletRepository.save(wallet);
     }
 
     @Override
