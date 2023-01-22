@@ -1,6 +1,7 @@
 package com.sir.wallet.controller;
 
 
+import com.sir.wallet.model.Transaction;
 import com.sir.wallet.model.Wallet;
 import com.sir.wallet.services.WalletService;
 import org.apache.logging.log4j.LogManager;
@@ -26,9 +27,10 @@ public class WalletController {
     }
 
     @GetMapping("/wallets/{id}")
-    public Optional<Wallet> getWallet(@PathVariable long id) {
+    public ResponseEntity<Optional<Wallet>>getWallet(@PathVariable long id) {
+        Optional<Wallet> wallet=walletService.getWalletById(id);
+        return new ResponseEntity<>(wallet, HttpStatus.CREATED);
 
-        return walletService.getWalletById(id);
     }
 
     @PutMapping("/wallets/{id}")

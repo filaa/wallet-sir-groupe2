@@ -63,7 +63,7 @@ private Wallet wallets;
     @Then("the response status should be {int}")
     public void checkResponseStatus(int status) {
 
-        assertEquals(status, response.getStatusCode().value());
+        assertEquals(status, response.getStatusCode());
     }
     @And("the response body should contain the wallet")
     public void checkResponseBody() {

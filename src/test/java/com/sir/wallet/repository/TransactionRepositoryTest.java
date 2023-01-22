@@ -26,7 +26,7 @@ class TransactionRepositoryTest {
         //Given
         Wallet wallet = new Wallet(1L,"Compte1",10000);
         walletRepository.save(wallet);
-        Transaction trans = new Transaction(wallet,5000,"depot");
+        Transaction trans = new Transaction(wallet.getId(),5000,"depot");
 
         //When
         Transaction transSave  = transactionRepository.save(trans);
@@ -43,7 +43,7 @@ class TransactionRepositoryTest {
         //Given
         Wallet wallet = new Wallet(1L,"Compte1",10000);
         walletRepository.save(wallet);
-        Transaction trans = transactionRepository.save(new Transaction(wallet,5000,"depot"));
+        Transaction trans = transactionRepository.save(new Transaction(wallet.getId(),5000,"depot"));
 
         trans.setAmount(10000);
         trans.setType("retrait");
@@ -60,7 +60,7 @@ class TransactionRepositoryTest {
         //Given
         Wallet wallet = new Wallet(1L,"Compte1",11000000);
         walletRepository.save(wallet);
-        Transaction transaction = transactionRepository.save(new Transaction(wallet,10000000,"retrait"));
+        Transaction transaction = transactionRepository.save(new Transaction(wallet.getId(),10000000,"retrait"));
         Long idTrans = transaction.getId();
         //when
         transactionRepository.delete(transaction);
@@ -76,7 +76,7 @@ class TransactionRepositoryTest {
         //Given
         Wallet wallet = new Wallet(1L,"Compte5",11000);
         walletRepository.save(wallet);
-        Transaction transaction = transactionRepository.save(new Transaction(wallet,1000,"depot"));
+        Transaction transaction = transactionRepository.save(new Transaction(wallet.getId(),1000,"depot"));
         Long idTrans = transaction.getId();
         //when
         Optional<Transaction> searchTrans = transactionRepository.findById(idTrans);
@@ -95,10 +95,10 @@ class TransactionRepositoryTest {
         Wallet wallet = new Wallet(1L,"Compte5",500000);
         walletRepository.save(wallet);
 
-        transactions.add(transactionRepository.save(new Transaction(wallet, 15000,"retrait")));
-        transactions.add(transactionRepository.save(new Transaction(wallet, 50000,"depot")));
-        transactions.add(transactionRepository.save(new Transaction(wallet,1000000, "depot")));
-        transactions.add(transactionRepository.save(new Transaction(wallet,400000, "retrait")));
+        transactions.add(transactionRepository.save(new Transaction(wallet.getId(), 15000,"retrait")));
+        transactions.add(transactionRepository.save(new Transaction(wallet.getId(), 50000,"depot")));
+        transactions.add(transactionRepository.save(new Transaction(wallet.getId(),1000000, "depot")));
+        transactions.add(transactionRepository.save(new Transaction(wallet.getId(),400000, "retrait")));
 
         //when
         List<Transaction> searchall = transactionRepository.findAll();

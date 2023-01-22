@@ -3,6 +3,7 @@ package com.sir.wallet.services;
 import com.sir.wallet.model.Transaction;
 import com.sir.wallet.model.Wallet;
 import com.sir.wallet.repository.TransactionRepository;
+import com.sir.wallet.repository.WalletRepository;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,13 +23,15 @@ class TransactionServiceImplTest {
 
     @Mock
     TransactionRepository transactionRepository;
+    @Mock
+    WalletRepository walletRepository;
 
     @Test
     void createTransaction() {
 
         //Given
-
-        Transaction transaction = new Transaction(new Wallet(1L,"Courant",100000),1000,"retrait");
+        when(walletRepository.findById(any())).thenReturn(Optional.of(new Wallet(1L,"my wallet",200)));
+        Transaction transaction = new Transaction(1L,1000,"retrait");
         transaction.setId(1L);
         when(transactionRepository.save(any())).thenReturn(transaction);
 
@@ -42,9 +45,8 @@ class TransactionServiceImplTest {
 
     @Test
     void getTransactionById() {
-        Transaction transaction= new Transaction(1L,new Wallet(1L,"Epargne",1000000),50000,"dépot");
+        Transaction transaction= new Transaction(1L,50000,"dépot");
         //Given
-
         when(transactionRepository.findById(any())).thenReturn(Optional.of(transaction));
 
         //When
@@ -59,7 +61,8 @@ class TransactionServiceImplTest {
     @Test
     void updateTransaction() {
         //Given
-        Transaction transaction= new Transaction(1L,new Wallet(1L,"Epargne",1000000),50000,"dépot");
+        Transaction transaction= new Transaction(1L,50000,"dépot");
+        when(walletRepository.findById(any())).thenReturn(Optional.of(new Wallet(1L,"my wallet",200)));
         when(transactionRepository.save(any())).thenReturn(transaction);
         transaction.setType("Retrait");
         transaction.setAmount(250000);
@@ -75,7 +78,7 @@ class TransactionServiceImplTest {
     @Test
     void deleteTransaction() {
         //Given
-        Transaction transaction= new Transaction(1L,new Wallet(1L,"Epargne",1000000),50000,"dépot");
+        Transaction transaction= new Transaction(1L,50000,"dépot");
         doNothing().when(transactionRepository).delete(transaction);
 
         //When
@@ -91,10 +94,10 @@ class TransactionServiceImplTest {
         List<Transaction> transactions= new ArrayList<>();
         Wallet wallet = new Wallet(1L,"Compte5",500000);
 
-        transactions.add(transactionRepository.save(new Transaction(wallet, 15000,"retrait")));
-        transactions.add(transactionRepository.save(new Transaction(wallet, 50000,"depot")));
-        transactions.add(transactionRepository.save(new Transaction(wallet,1000000, "depot")));
-        transactions.add(transactionRepository.save(new Transaction(wallet,400000, "retrait")));
+        transactions.add(transactionRepository.save(new Transaction(1L, 15000,"retrait")));
+        transactions.add(transactionRepository.save(new Transaction(1L, 50000,"depot")));
+        transactions.add(transactionRepository.save(new Transaction(1L,1000000, "depot")));
+        transactions.add(transactionRepository.save(new Transaction(1L,400000, "retrait")));
         when(transactionRepository.findAll()).thenReturn(transactions);
 
         //When

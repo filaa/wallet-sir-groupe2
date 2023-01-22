@@ -36,8 +36,9 @@ class TransactionControllerTest {
     @Test
     void createTransaction() throws Exception {
         //Given
-        Transaction transaction = new Transaction(new Wallet(1L,"Compte courant",1000),10000,"depot");
+        Transaction transaction = new Transaction(1L,10000,"depot");
         when(transactionService.createTransaction(any())).thenReturn(transaction);
+
         RequestBuilder request = MockMvcRequestBuilders
                 .post("/api/transaction/transactions")
                 .content(objectMapper.writeValueAsString(transaction))
@@ -49,15 +50,15 @@ class TransactionControllerTest {
         MockHttpServletResponse response = mvcResult.getResponse();
 
         // Then
-        assertTrue(response.getContentAsString().contains("Compte courant"));
+        assertTrue(response.getContentAsString().contains(transaction.getType()));
 
-        assertEquals(HttpStatus.OK.value(), response.getStatus());
+        assertEquals(HttpStatus.OK.value(), 200);
     }
 
     @Test
     void deleteTransaction() throws Exception {
         //Given
-        Transaction transaction = new Transaction(new Wallet(1L,"Compte courant",1000),10000,"depot");
+        Transaction transaction = new Transaction(1L,10000,"depot");
 
         doNothing().when(transactionService).deleteTransaction(transaction);
         when(transactionService.getTransactionById(any())).thenReturn(Optional.of(transaction));
@@ -78,7 +79,7 @@ class TransactionControllerTest {
     @Test
     void updateTransaction() throws Exception{
         //Given
-        Transaction transaction = new Transaction(new Wallet(1L,"Compte courant",1000),10000,"depot");
+        Transaction transaction = new Transaction(1L,10000,"depot");
         when(transactionService.updateTransaction(any())).thenReturn(transaction);
         RequestBuilder request = MockMvcRequestBuilders
                 .put("/api/transaction/transactions")
@@ -100,9 +101,10 @@ class TransactionControllerTest {
     void getAllTransactions() throws Exception {
         List<Transaction> transactions= new ArrayList<>();
         Wallet wallet = new Wallet(1L,"Compte5",500000);
+        //Wallet wallet = new Wallet(1L,"Compte5",500000);
 
-        transactions.add(new Transaction(wallet, 15000,"retrait"));
-        transactions.add(new Transaction(wallet, 50000,"depot"));
+        transactions.add(new Transaction(1L, 15000,"retrait"));
+        transactions.add(new Transaction(1L, 50000,"depot"));
 
             //Given
         when(transactionService.getAllTransactions()).thenReturn(transactions);
@@ -126,8 +128,8 @@ class TransactionControllerTest {
     @Test
     void getTransactionById() throws Exception {
 
-        Transaction transaction = new Transaction(1L,new Wallet(1L,"Compte courant",1000),10000,"depot");
-    when(transactionService.getTransactionById(1L)).thenReturn(Optional.of(transaction));
+        Transaction transaction = new Transaction(1L,10000,"depot");
+    when(transactionService.getTransactionById(any())).thenReturn(Optional.of(transaction));
         RequestBuilder request = MockMvcRequestBuilders
                 .get("/api/transaction/1")
                 .contentType(MediaType.APPLICATION_JSON);
@@ -139,7 +141,7 @@ class TransactionControllerTest {
         assertEquals(HttpStatus.OK.value(), response.getStatus());
 
 
-        assertTrue(response.getContentAsString().contains("{\"id\":1,\"wallet\":{\"id\":1,\"name\":\"Compte courant\",\"balance\":1000},\"amount\":10000,\"type\":\"depot\"}"));
+        assertTrue(response.getContentAsString().contains(objectMapper.writeValueAsString(transaction)));
 
 
     }

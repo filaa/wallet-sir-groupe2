@@ -2,6 +2,7 @@ package com.sir.wallet.controller;
 
 import com.sir.wallet.model.Transaction;
 import com.sir.wallet.services.TransactionService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,8 +19,10 @@ public class TransactionController {
     }
 
     @PostMapping("/transactions")
-    public Transaction createTransaction(@RequestBody Transaction transaction) {
-        return transactionService.createTransaction(transaction);
+    public ResponseEntity<Transaction> createTransaction(@RequestBody Transaction transaction) {
+       Transaction transCreated=transactionService.createTransaction(transaction);
+        return new ResponseEntity<Transaction>(transCreated, HttpStatus.CREATED);
+
     }
     @DeleteMapping("/transactions")
     public ResponseEntity<Void> deleteTransaction( @RequestBody Transaction transaction )  {
