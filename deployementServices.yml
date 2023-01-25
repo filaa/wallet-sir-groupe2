@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name:sir-soir-groupe2-deployment
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app:sir-soir-groupe2
