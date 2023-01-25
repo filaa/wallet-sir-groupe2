@@ -1,0 +1,19 @@
+apiVersion: app/v1.0
+kind: Deployment
+metadata:
+  name:sir-soir-groupe2-deployment
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app:sir-soir-groupe2
+  template:
+    metadata:
+      labels:
+        app:sir-soir-groupe2
+    spec:
+      containers:
+        - name: groupe2
+          image: sirsoir2022/sir-soir:latest
+          ports:
+            - containerPort: 8081
