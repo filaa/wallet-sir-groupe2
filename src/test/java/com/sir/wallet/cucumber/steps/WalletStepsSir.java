@@ -4,7 +4,6 @@ package com.sir.wallet.cucumber.steps;
 import com.sir.wallet.controller.WalletController;
 import com.sir.wallet.model.Wallet;
 import com.sir.wallet.repository.WalletRepository;
-import com.sir.wallet.services.WalletService;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -20,11 +19,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
+
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -79,13 +77,14 @@ private Wallet wallets;
     @When("I GET the wallet from the {string} endpoint")
     public void getWallet(String endpoint) {
 
-        response = restTemplate.getForEntity("https://localhost:8080/api/wallet/wallets/{id}", Wallet.class,wallet.getId());
+        response = restTemplate.getForEntity("http://localhost:8080/api/wallet/wallets/{id}", Wallet.class,wallet.getId());
 
     }
     @When("I PUT the wallet to the {string} endpoint with name {string} and balance {int}")
     public void updateWallet(String endpoint, String name, int balance) {
-        Wallet updatedWallet = new Wallet(1, "Update Wallet", 200);
-        response = restTemplate.exchange(endpoint, HttpMethod.PUT, new HttpEntity<>(updatedWallet), Wallet.class);
+        wallet.setBalance(balance);
+        wallet.setName(name);
+        response = restTemplate.exchange(endpoint, HttpMethod.PUT, new HttpEntity<>(wallet), Wallet.class);
     }
 
     @And("the response body should contain the updated wallet")
