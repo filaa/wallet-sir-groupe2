@@ -24,7 +24,7 @@ pipeline{
                                          }
             stage('login to docker Hub'){
                                       steps{
-                                             bat 'docker login -u palaye -p gamakishi'
+                                             bat 'docker login -u sirsoir202 -p sirsoir202'
                                                         }
                                              }
             stage('Push to docker Hub'){
