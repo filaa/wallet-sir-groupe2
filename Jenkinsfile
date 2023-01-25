@@ -30,8 +30,8 @@ pipeline{
             stage('Push to docker Hub'){
                                        steps{
 
-                                           bat 'docker login -u palaye '
-                                           bat 'docker push palaye/sir-soir-groupe2:latest'
+
+                                           bat 'docker push sirsoir2022/sir-soir-groupe2:latest'
                                                    }
                                            }
 
