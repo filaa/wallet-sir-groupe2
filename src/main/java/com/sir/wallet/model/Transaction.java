@@ -19,7 +19,7 @@ public class Transaction {
     private String type;
 
     @Column(name = "id_wallet",insertable = false,updatable = false)
-    private long walletId;
+    private Long walletId;
 
     public Transaction(long walletId,long amount, String type) {
         this.amount = amount;

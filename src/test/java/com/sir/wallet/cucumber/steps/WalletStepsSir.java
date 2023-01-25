@@ -51,7 +51,7 @@ private Wallet wallets;
     @Given("a wallet with name {string} and balance {long}")
     public void createWallet(String name, long balance) {
 
-        wallet = new Wallet(1,"test", 2000);
+        wallet = new Wallet(name, balance);
 
     }
     @When("I POST the wallet to the {string} endpoint")
@@ -63,7 +63,7 @@ private Wallet wallets;
     @Then("the response status should be {int}")
     public void checkResponseStatus(int status) {
 
-        assertEquals(status, response.getStatusCode());
+        assertEquals(status, response.getStatusCode().value());
     }
     @And("the response body should contain the wallet")
     public void checkResponseBody() {
@@ -73,7 +73,7 @@ private Wallet wallets;
 
     @Given("a wallet with ID {int} and name {string} and balance {int}")
     public void createWallet(long id, String name, long balance) {
-         wallet = new Wallet(1, "walllet", 100);
+         wallet = new Wallet(id, name, balance);
     }
 
     @When("I GET the wallet from the {string} endpoint")

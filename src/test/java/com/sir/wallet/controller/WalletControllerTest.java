@@ -28,7 +28,7 @@ import static org.mockito.Mockito.when;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 class WalletControllerTest {
-
+    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     MockMvc mockMvc;
     @MockBean
@@ -93,7 +93,7 @@ class WalletControllerTest {
         // Then
         assertTrue(response.getContentAsString().contains("Compte courant"));
 
-        assertEquals(HttpStatus.OK.value(), response.getStatus());
+        assertEquals(HttpStatus.CREATED.value(), response.getStatus());
     }
 
     @Test
