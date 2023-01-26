@@ -76,9 +76,8 @@ private Wallet wallets;
 
     @When("I GET the wallet from the {string} endpoint")
     public void getWallet(String endpoint) {
-
-        response = restTemplate.getForEntity("http://localhost:8080/api/wallet/wallets/{id}", Wallet.class,wallet.getId());
-
+        String url = "http://localhost:8080/api/wallet/" + endpoint + "/{id}";
+        response = restTemplate.getForEntity(url, Wallet.class, wallet.getId());
     }
     @When("I PUT the wallet to the {string} endpoint with name {string} and balance {int}")
     public void updateWallet(String endpoint, String name, int balance) {
