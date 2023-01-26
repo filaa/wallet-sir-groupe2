@@ -1,4 +1,4 @@
-apiVersion: app/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name:sir-soir-groupe2-deployment
@@ -14,6 +14,6 @@ spec:
     spec:
       containers:
         - name: groupe2
-          image: sirsoir2022/sir-soir:latest
+          image: sirsoir2022/sir-soir:1.0
           ports:
             - containerPort: 8081
